@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HttpConfig>
+<!-- "serverName", "port", "maxThread", "minThread", "sessionTimeout" -->
+	<serverName>MyHttpServer</serverName>
+	<port>8080</port>
+	<maxThread>120</maxThread>
+	<minThread>2</minThread>
+	<sessionTimeout>20</sessionTimeout>
+</HttpConfig>

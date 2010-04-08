@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     2009-3-29 20:34:54                                                        
+
+     Xfeep Asura Core    
+                   
+     zhangyuexiang                                                                
+     ====================================================================== -->
+<project name="Xfeep Asura Core" default="dist">
+    <description>
+    	Xfeep Asura Core Ant Build File
+    </description>
+
+	<property name="composite" value="org.xfeep.asura.core"></property>
+	<property name="version" value="1.0M2"></property>
+	<property name="dist.dir" value="../xfeep_dist/${version}"></property>
+	<property name="project.dir" value="."></property>
+	
+	<path id="compile.classpath">
+		<fileset dir="" includes="*.jar"></fileset>
+	</path>
+    <!-- ================================= 
+          target: dist              
+         ================================= -->
+    <target name="dist" depends="jar,test" description="description">
+        
+    </target>
+	
+	 <!-- ================================= 
+          target: jar              
+         ================================= -->
+    <target name="jar" depends="compile" description="jar dist files">
+        <jar destfile="${dist.dir}/${composite}_${version}.jar" manifest="${project.dir}/bin/META-INF/MANIFEST.MF">
+        	<fileset dir="${project.dir}/bin" excludes="org/xfeep/asura/conf/jaxb**"></fileset>
+        </jar>
+    	<zip destfile="${dist.dir}/${composite}_${version}_src.zip">
+    	        	<fileset dir="${project.dir}" excludes="bin/**,testbin/**"></fileset>
+    	 </zip>
+    </target>
+
+	<!-- ================================= 
+          target: compile              
+         ================================= -->
+    <target name="compile"  description="compile java file">
+        <javac target="1.5" destdir="${project.dir}/bin" srcdir="${project.dir}/main">
+		</javac>
+    </target>
+
+	
+	<!-- ================================= 
+          target: test              
+         ================================= -->
+    <target name="test" depends="jar" description="run junit tests">
+        <junit  fork="yes" haltonfailure="yes" printsummary="true">
+        	<classpath>
+        		<pathelement location="${dist.dir}/${composite}_${version}.jar"/>
+        		<pathelement path="${project.dir}/testbin"/>
+        		<pathelement location="${project.dir}/lib/test/junit.jar"/>
+        	</classpath>
+        	 <batchtest fork="yes" todir="${dist.dir}">
+        	    <fileset dir="${project.dir}/testmain">
+        	      <include name="**/*TestSet.java"/>
+        	    </fileset>
+        	  </batchtest>
+        </junit>
+    </target>
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="depends">
+    </target>
+	
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+    <target name="clean" depends="depends" description="description">
+        <delete verbose="true">
+        	<fileset dir="${dist.dir}" includes="*.jar"></fileset>
+        </delete>
+    </target>
+
+</project>

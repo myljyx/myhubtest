@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Composite-ManifestVersion: 1
+Composite-Name: Xfeep Asura Core Composite
+Composite-Id: org.xfeep.asura.core
+Composite-Version: 1.0.0.M1
+Composite-Vendor: Xfeep
+Asura-Component: org.xfeep.asura.core.config.ConfigAdminService,
+ org.xfeep.asura.core.config.ConfigServiceImp,
+ org.xfeep.asura.core.ComponentFactoryServiceImp,
+ org.xfeep.asura.core.TinyLogService,
+ org.xfeep.asura.core.SimpleRegisterService
